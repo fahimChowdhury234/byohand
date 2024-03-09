@@ -86,12 +86,12 @@
 
                      <div class="auth-form">
                         <label for="email">Email</label>
-                        <input type="email" name="email" id="email" />
+                        <input type="email" name="email" id="email" required />
                         <div id="emailError" class="error-message"></div>
                      </div>
                      <div class="auth-form">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password" />
+                        <input type="password" name="password" id="password" required />
                         <div id="passwordError" class="error-message"></div>
                      </div>
 
@@ -135,6 +135,10 @@
                emailError.textContent = "Email is required";
                return;
             }
+            if (!isValidEmail(email)) {
+               emailError.textContent = "Invalid email format";
+               return;
+            }
             if (!password.trim()) {
                passwordError.textContent = "Password is required";
                return;
@@ -154,6 +158,11 @@
             loginButton.disabled = false;
             loginButton.textContent = "Login";
          });
+         function isValidEmail(email) {
+            // Regular expression to validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+         }
       </script>
    </body>
 </html>

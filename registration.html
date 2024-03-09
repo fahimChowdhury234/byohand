@@ -85,22 +85,22 @@
                      </div>
                      <div class="auth-form">
                         <label for="name">Name</label>
-                        <input type="text" name="name" id="name" />
+                        <input type="text" name="name" id="name" required />
                         <div id="nameError" class="error-message"></div>
                      </div>
                      <div class="auth-form">
                         <label for="email">Email</label>
-                        <input type="email" name="email" id="email" />
+                        <input type="email" name="email" id="email" required />
                         <div id="emailError" class="error-message"></div>
                      </div>
                      <div class="auth-form">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password" />
+                        <input type="password" name="password" id="password" required />
                         <div id="passwordError" class="error-message"></div>
                      </div>
                      <div class="auth-form">
                         <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" name="confirmPassword" id="confirmPassword" />
+                        <input type="password" name="confirmPassword" id="confirmPassword" required />
                         <div id="confirmPasswordError" class="error-message"></div>
                      </div>
                      <div class="auth-footer">
@@ -155,6 +155,10 @@
                emailError.textContent = "Email is required";
                return;
             }
+            if (!isValidEmail(email)) {
+               emailError.textContent = "Invalid email format";
+               return;
+            }
             if (!password.trim()) {
                passwordError.textContent = "Password is required";
                return;
@@ -176,6 +180,11 @@
             registerButton.textContent = "Register";
             registerButton.disabled = false;
          });
+         function isValidEmail(email) {
+            // Regular expression to validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+         }
       </script>
    </body>
 </html>
